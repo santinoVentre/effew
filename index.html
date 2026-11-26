@@ -1,0 +1,450 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>EFFEW Pedane Pisa</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="EFFEW ritira, ripara e consegna pedane in legno a Pisa e provincia.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&display=swap">
+<style>
+/* Layout: hero video a tutto schermo, poi tre colonne "a doghe" (ritiro, riparazione, consegna), fascia dettaglio, contatto con indirizzo email gigante. */
+:root {
+  --cemento: #E7E8E3;     /* fondo: cemento chiaro, freddo */
+  --cemento-2: #D9DBD4;   /* superfici secondarie */
+  --abete: #16211C;       /* inchiostro: verde abete quasi nero */
+  --abete-soft: #4A5650;  /* testo secondario */
+  --muletto: #F3C318;     /* accento: giallo carrello elevatore */
+  --pino: #C69A5C;        /* legno grezzo, solo dettagli */
+  --font: "Archivo", "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
+  --gutter: max(16px, env(safe-area-inset-left, 0px));
+  --gutter-r: max(16px, env(safe-area-inset-right, 0px));
+  --wrap: 1320px;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--cemento);
+  color: var(--abete);
+  font-family: var(--font);
+  font-size: 1.0625rem;
+  line-height: 1.55;
+  font-variation-settings: "wdth" 100;
+}
+img, video { display: block; max-width: 100%; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--muletto); outline-offset: 3px; }
+
+.wrap {
+  max-width: var(--wrap);
+  margin-inline: auto;
+  padding-left: var(--gutter);
+  padding-right: var(--gutter-r);
+}
+
+/* ---------- Header ---------- */
+.top {
+  position: absolute; inset: 0 0 auto; z-index: 5;
+  color: #fff;
+}
+.top .wrap {
+  display: flex; align-items: center; justify-content: space-between;
+  padding-block: 20px;
+}
+.mark {
+  font-weight: 900; font-size: 1.5rem; letter-spacing: -0.01em;
+  font-variation-settings: "wdth" 125; text-decoration: none;
+}
+.top-link {
+  font-weight: 600; text-decoration: none;
+  padding: 10px 18px; border: 1.5px solid rgba(255,255,255,.7); border-radius: 999px;
+  transition: background-color .2s, color .2s;
+}
+.top-link:hover { background: #fff; color: var(--abete); }
+
+/* ---------- Hero ---------- */
+.hero {
+  position: relative; isolation: isolate;
+  min-height: min(92svh, 900px);
+  display: grid; align-items: end;
+  color: #fff; background: #2a2c28;
+  overflow: hidden;
+}
+.hero-media {
+  position: absolute; inset: 0; z-index: -2;
+  width: 100%; height: 100%; object-fit: cover;
+}
+.hero::after {
+  content: ""; position: absolute; inset: 0; z-index: -1;
+  background:
+    linear-gradient(90deg, rgba(12,16,14,.55) 0%, rgba(12,16,14,.15) 55%, rgba(12,16,14,0) 80%),
+    linear-gradient(180deg, rgba(12,16,14,.5) 0%, rgba(12,16,14,.1) 30%, rgba(12,16,14,.25) 55%, rgba(12,16,14,.85) 100%);
+}
+.hero .wrap { width: 100%; padding-block: 120px 44px; }
+.hero h1 {
+  margin: 0;
+  font-weight: 850;
+  font-size: clamp(3.1rem, 11.5vw, 10.5rem);
+  line-height: .86;
+  letter-spacing: -0.035em;
+  font-variation-settings: "wdth" 62;
+  text-wrap: balance;
+  max-width: 11ch;
+}
+.hero-foot {
+  margin-top: 32px;
+  display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 24px;
+}
+.hero-foot p {
+  margin: 0; max-width: 34ch; font-size: clamp(1.05rem, 1.6vw, 1.3rem); line-height: 1.4;
+  color: rgba(255,255,255,.9);
+}
+.btns { display: flex; flex-wrap: wrap; gap: 12px; }
+.btn {
+  display: inline-flex; align-items: center; gap: .6em;
+  font: inherit; font-weight: 700; font-size: 1.05rem;
+  padding: 16px 26px; border-radius: 999px; text-decoration: none; cursor: pointer;
+  transition: transform .2s ease, background-color .2s, color .2s;
+}
+.btn-main { background: var(--muletto); color: var(--abete); border: 0; }
+.btn-main:hover { transform: translateY(-2px); }
+.btn-ghost { background: transparent; color: inherit; border: 1.5px solid currentColor; }
+.btn-ghost:hover { background: #fff; color: var(--abete); border-color: #fff; }
+
+/* Entrata hero: il titolo si "allarga" come una pila che si apre */
+@media (prefers-reduced-motion: no-preference) {
+  .js .hero h1 { animation: stretch 1.4s cubic-bezier(.2,.7,.1,1) both .15s; }
+  .js .hero-foot { animation: rise .9s ease both .9s; }
+  .js .hero-media { animation: settle 2.4s ease-out both; }
+}
+@keyframes stretch {
+  from { font-variation-settings: "wdth" 125; letter-spacing: .02em; opacity: 0; clip-path: inset(0 100% 0 0); }
+  40% { opacity: 1; }
+  to { font-variation-settings: "wdth" 62; letter-spacing: -0.035em; opacity: 1; clip-path: inset(0 0 0 0); }
+}
+@keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+@keyframes settle { from { transform: scale(1.08); filter: brightness(.6); } to { transform: scale(1); filter: none; } }
+
+/* ---------- Il giro: ritiro, riparazione, consegna ---------- */
+.giro { padding-block: clamp(72px, 10vw, 140px) clamp(56px, 8vw, 110px); }
+.giro-head {
+  display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px;
+  margin-bottom: clamp(36px, 5vw, 64px);
+}
+.giro-head h2, .contatto h2 {
+  margin: 0; font-weight: 800; letter-spacing: -0.03em; line-height: .95;
+  font-size: clamp(2.3rem, 6vw, 4.8rem);
+  font-variation-settings: "wdth" 70;
+  text-wrap: balance; max-width: 16ch;
+}
+.giro-head p { margin: 0; max-width: 46ch; color: var(--abete-soft); font-size: 1.15rem; }
+@media (min-width: 900px) {
+  .giro-head { grid-template-columns: 1.3fr 1fr; align-items: end; }
+}
+
+.doghe {
+  list-style: none; margin: 0; padding: 0;
+  display: grid; grid-template-columns: minmax(0, 1fr); gap: clamp(28px, 3vw, 40px);
+}
+@media (min-width: 760px) {
+  .doghe { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .doghe li:nth-child(2) { margin-top: 72px; }
+  .doghe li:nth-child(3) { margin-top: 144px; }
+}
+.doga figure { margin: 0; position: relative; }
+.doga .pic {
+  position: relative; overflow: hidden; border-radius: 4px;
+  aspect-ratio: 4 / 5; background: var(--cemento-2);
+}
+.doga img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s cubic-bezier(.2,.7,.1,1); }
+.doga:hover img { transform: scale(1.04); }
+.doga .n {
+  font-weight: 900; font-size: clamp(4rem, 7vw, 6rem); line-height: .8;
+  font-variation-settings: "wdth" 62; letter-spacing: -0.04em;
+  color: var(--pino);
+  margin: 18px 0 6px;
+}
+.doga h3 {
+  margin: 0 0 6px; font-weight: 800; font-size: 1.6rem; letter-spacing: -0.015em;
+  font-variation-settings: "wdth" 90;
+}
+.doga p { margin: 0; max-width: 32ch; color: var(--abete-soft); }
+
+/* Timbro "RIPARATA" che si imprime sulla foto */
+.timbro {
+  position: absolute; right: 7%; bottom: 9%;
+  transform: rotate(-9deg);
+  border: 4px solid var(--muletto); color: var(--muletto);
+  padding: 8px 14px 6px; border-radius: 6px;
+  font-weight: 900; font-size: clamp(1.4rem, 2.4vw, 2rem); line-height: 1;
+  font-variation-settings: "wdth" 75; letter-spacing: .04em;
+  mix-blend-mode: normal;
+  box-shadow: inset 0 0 0 2px var(--muletto);
+  background: rgba(22,33,28,.18);
+  backdrop-filter: blur(1px);
+  pointer-events: none;
+}
+.timbro small { display: block; font-size: .42em; font-weight: 700; letter-spacing: .12em; margin-top: 4px; }
+@media (prefers-reduced-motion: no-preference) {
+  .js .doga .pic { clip-path: inset(0 0 0 0); transition: clip-path 1.1s cubic-bezier(.2,.7,.1,1); }
+  .js .doga.armed .pic { clip-path: inset(100% 0 0 0); }
+  .js .timbro { transition: transform .35s cubic-bezier(.3,1.6,.5,1), opacity .2s; }
+  .js .doga.armed .timbro { transform: rotate(-9deg) scale(1.9); opacity: 0; }
+  .js .doga.stamped .timbro { transition-delay: .9s; }
+}
+
+/* ---------- Fascia dettaglio ---------- */
+.fibra { position: relative; color: #fff; background: var(--abete); overflow: hidden; }
+.fibra img {
+  width: 100%; height: clamp(360px, 48vw, 620px); object-fit: cover;
+  opacity: .78;
+}
+.fibra::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(180deg, rgba(22,33,28,0) 35%, rgba(22,33,28,.75) 100%);
+}
+.fibra .wrap { z-index: 1; }
+.fibra .wrap {
+  position: absolute; inset: auto 0 0 0;
+  padding-block: 0 clamp(28px, 5vw, 64px);
+}
+.fibra p {
+  margin: 0; max-width: 20ch;
+  font-weight: 800; letter-spacing: -0.025em; line-height: 1;
+  font-size: clamp(1.9rem, 4.6vw, 4rem);
+  font-variation-settings: "wdth" 72;
+  text-wrap: balance;
+}
+
+/* ---------- Per chi ---------- */
+.chi { padding-block: clamp(64px, 9vw, 120px) 0; }
+.chi ul {
+  list-style: none; margin: 0; padding: 0;
+  display: flex; flex-wrap: wrap; gap: 10px 12px;
+}
+.chi li {
+  padding: 10px 18px; border: 1.5px solid var(--abete); border-radius: 999px;
+  font-weight: 600; font-size: 1.05rem;
+}
+.chi h2 {
+  margin: 0 0 22px; font-weight: 700; font-size: 1.25rem; letter-spacing: -0.005em;
+}
+
+/* ---------- Contatto ---------- */
+.contatto { padding-block: clamp(72px, 10vw, 140px); }
+.contatto h2 { margin-bottom: 18px; }
+.contatto > .wrap > p { margin: 0 0 40px; max-width: 44ch; color: var(--abete-soft); font-size: 1.15rem; }
+.mail-big {
+  display: inline-block; text-decoration: none;
+  font-weight: 800; letter-spacing: -0.035em; line-height: 1;
+  font-size: clamp(1.7rem, 7.2vw, 6.6rem);
+  font-variation-settings: "wdth" 62;
+  overflow-wrap: anywhere;
+  background-image: linear-gradient(var(--muletto), var(--muletto));
+  background-size: 100% .14em; background-repeat: no-repeat; background-position: 0 92%;
+  transition: background-size .35s ease;
+}
+.mail-big:hover { background-size: 100% .9em; }
+.segnaposto {
+  display: inline-block; margin-left: 10px; vertical-align: middle;
+  font-size: .8rem; font-weight: 700; letter-spacing: .02em;
+  background: #fff; border: 2px dashed #c2410c; color: #9a3412;
+  padding: 4px 10px; border-radius: 6px;
+}
+.mail-row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-bottom: 36px; }
+.copy {
+  font: inherit; font-weight: 600; font-size: .95rem; cursor: pointer;
+  background: transparent; color: var(--abete); border: 1.5px solid var(--abete);
+  padding: 8px 16px; border-radius: 999px;
+}
+.copy:hover { background: var(--abete); color: var(--cemento); }
+.contatto .btn-ghost { color: var(--abete); }
+.contatto .btn-ghost:hover { background: var(--abete); color: var(--cemento); border-color: var(--abete); }
+
+/* ---------- Footer ---------- */
+footer { background: var(--abete); color: rgba(255,255,255,.78); font-size: .95rem; }
+footer .wrap {
+  padding-block: 44px calc(44px + env(safe-area-inset-bottom, 0px));
+  display: grid; gap: 24px; grid-template-columns: minmax(0, 1fr);
+}
+@media (min-width: 760px) { footer .wrap { grid-template-columns: 1.2fr 1fr 1fr; } }
+footer strong { color: #fff; display: block; margin-bottom: 4px; font-size: 1.05rem; }
+footer p { margin: 0; }
+footer .mark { color: #fff; font-size: 2.2rem; display: inline-block; margin-bottom: 6px; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="mark" href="#">EFFEW</a>
+    <a class="top-link js-mail" href="mailto:EMAIL_DA_INSERIRE@effew.it?subject=Richiesta%20informazioni%20pedane">Scrivici</a>
+  </div>
+</header>
+
+<main>
+  <section class="hero" aria-labelledby="titolo">
+    <video class="hero-media" src="assets/hero.mp4" poster="assets/hero-poster.jpg" autoplay muted loop playsinline preload="auto" aria-hidden="true"></video>
+    <div class="wrap">
+      <h1 id="titolo">Pedane che tornano a lavorare.</h1>
+      <div class="hero-foot">
+        <p>Ritiriamo, ripariamo e consegniamo pedane in legno a Pisa e provincia.</p>
+        <div class="btns">
+          <a class="btn btn-main js-mail" href="mailto:EMAIL_DA_INSERIRE@effew.it?subject=Richiesta%20ritiro%20pedane">Richiedi un ritiro</a>
+          <a class="btn btn-ghost js-mail" href="mailto:EMAIL_DA_INSERIRE@effew.it?subject=Richiesta%20preventivo">Chiedi un preventivo</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="giro" aria-labelledby="giro-t">
+    <div class="wrap">
+      <div class="giro-head">
+        <h2 id="giro-t">Dal tuo piazzale al tuo magazzino.</h2>
+        <p>Ci occupiamo noi di tutto il giro. Tu ci dici quante pedane e dove, al resto pensiamo noi.</p>
+      </div>
+      <ol class="doghe">
+        <li class="doga">
+          <figure>
+            <div class="pic"><img src="assets/ritiro.jpg" alt="Un operatore carica pedane usate su un furgone" width="1100" height="1366" loading="lazy"></div>
+            <figcaption>
+              <div class="n" aria-hidden="true">1</div>
+              <h3>Ritiro</h3>
+              <p>Passiamo a prendere le pedane usate o rotte, direttamente da te.</p>
+            </figcaption>
+          </figure>
+        </li>
+        <li class="doga">
+          <figure>
+            <div class="pic">
+              <img src="assets/riparazione.jpg" alt="Mani che fissano una doga nuova su una pedana con una chiodatrice" width="1100" height="1366" loading="lazy">
+              <span class="timbro" aria-hidden="true">RIPARATA<small>EFFEW · PISA</small></span>
+            </div>
+            <figcaption>
+              <div class="n" aria-hidden="true">2</div>
+              <h3>Riparazione</h3>
+              <p>Sostituiamo doghe e blocchetti danneggiati. Quello che si può salvare, lo salviamo.</p>
+            </figcaption>
+          </figure>
+        </li>
+        <li class="doga">
+          <figure>
+            <div class="pic"><img src="assets/consegna.jpg" alt="Un carrello elevatore solleva una pila di pedane riparate" width="1100" height="1366" loading="lazy"></div>
+            <figcaption>
+              <div class="n" aria-hidden="true">3</div>
+              <h3>Consegna</h3>
+              <p>Riportiamo le pedane pronte all'uso, dove e quando ti servono.</p>
+            </figcaption>
+          </figure>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="fibra" aria-label="Riparare invece di buttare">
+    <img src="assets/dettaglio.jpg" alt="" width="2400" height="1018" loading="lazy">
+    <div class="wrap">
+      <p>Una pedana riparata costa meno di una nuova. E non finisce in discarica.</p>
+    </div>
+  </section>
+
+  <section class="chi" aria-labelledby="chi-t">
+    <div class="wrap">
+      <h2 id="chi-t">Per chi usa pedane ogni giorno</h2>
+      <ul>
+        <li>Magazzini e logistica</li>
+        <li>Trasportatori</li>
+        <li>Aziende di produzione</li>
+        <li>Grande e piccola distribuzione</li>
+        <li>Edilizia e cantieri</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="contatto" id="contatti" aria-labelledby="contatto-t">
+    <div class="wrap">
+      <h2 id="contatto-t">Hai pedane da ritirare o da sistemare?</h2>
+      <p>Scrivici quante sono, in che stato e dove si trovano. Ti rispondiamo con tempi e costi.</p>
+      <div class="mail-row">
+        <a class="mail-big js-mail js-mail-text" href="mailto:EMAIL_DA_INSERIRE@effew.it?subject=Richiesta%20informazioni%20pedane">EMAIL_DA_INSERIRE@effew.it</a>
+        <span class="segnaposto">Segnaposto: email da inserire</span>
+      </div>
+      <div class="btns">
+        <a class="btn btn-main js-mail" href="mailto:EMAIL_DA_INSERIRE@effew.it?subject=Richiesta%20ritiro%20pedane">Richiedi un ritiro</a>
+        <a class="btn btn-ghost js-mail" href="mailto:EMAIL_DA_INSERIRE@effew.it?subject=Richiesta%20riparazione%20pedane">Chiedi una riparazione</a>
+        <button class="copy" type="button" id="copia-email">Copia indirizzo</button>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <span class="mark">EFFEW</span>
+      <p>Ritiro, riparazione e consegna di pedane in legno.</p>
+    </div>
+    <div>
+      <strong>EFFEW S.R.L.S.</strong>
+      <p>Lungarno Guadalongo 4<br>56125 Pisa (PI), Toscana</p>
+    </div>
+    <div>
+      <p>P. IVA e C.F. 02494660505<br>VAT IT02494660505</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  // Unico punto da modificare per l'indirizzo email
+  var EMAIL = "EMAIL_DA_INSERIRE@effew.it";
+
+  document.documentElement.classList.add("js");
+
+  document.querySelectorAll(".js-mail").forEach(function (a) {
+    a.href = a.href.replace(/^mailto:[^?]*/, "mailto:" + EMAIL);
+  });
+  document.querySelectorAll(".js-mail-text").forEach(function (a) { a.textContent = EMAIL; });
+
+  var copy = document.getElementById("copia-email");
+  copy.addEventListener("click", function () {
+    var done = function () { copy.textContent = "Indirizzo copiato"; setTimeout(function () { copy.textContent = "Copia indirizzo"; }, 2000); };
+    try {
+      navigator.clipboard.writeText(EMAIL).then(done, function () { selectMail(); });
+    } catch (e) { selectMail(); }
+  });
+  function selectMail() {
+    var el = document.querySelector(".js-mail-text");
+    var r = document.createRange(); r.selectNodeContents(el);
+    var s = getSelection(); s.removeAllRanges(); s.addRange(r);
+  }
+
+  // Le foto si scoprono una alla volta; il timbro si imprime dopo la foto
+  if (!matchMedia("(prefers-reduced-motion: reduce)").matches && "IntersectionObserver" in window) {
+    var items = document.querySelectorAll(".doga");
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          e.target.classList.add("stamped");
+          e.target.classList.remove("armed");
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.25 });
+    items.forEach(function (el) {
+      var r = el.getBoundingClientRect();
+      if (r.top > innerHeight) { el.classList.add("armed"); io.observe(el); }
+    });
+  }
+})();
+</script>
+</body>
+</html>
